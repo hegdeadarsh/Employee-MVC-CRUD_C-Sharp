@@ -107,5 +107,21 @@ namespace MVCCRUD.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DeletebyId(Guid id)
+        {
+            var employee = await mvcDemoDbContext.Employees.FirstOrDefaultAsync(x => x.Id == id);
+
+            if (employee != null) 
+            {
+                mvcDemoDbContext.Employees.Remove(employee);
+
+                await mvcDemoDbContext.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
