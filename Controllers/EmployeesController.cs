@@ -61,7 +61,8 @@ namespace MVCCRUD.Controllers
                     Email = employee.Email,
                     Salary = employee.Salary,
                     Department = employee.Department,
-                    DateOfBirth = employee.DateOfBirth
+                    DateOfBirth = employee.DateOfBirth,
+                    CreatedOn = DateTime.Now
                 };
                 return await Task.Run(() => View("View", viewModel));
             }
