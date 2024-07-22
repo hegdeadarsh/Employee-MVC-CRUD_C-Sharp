@@ -38,7 +38,8 @@ namespace MVCCRUD.Controllers
                 Email = addEmployeeRequest.Email,
                 Salary = addEmployeeRequest.Salary,
                 Department = addEmployeeRequest.Department,
-                DateOfBirth = addEmployeeRequest.DateOfBirth
+                DateOfBirth = addEmployeeRequest.DateOfBirth,
+                CreatedOn = DateTime.Now
             };
 
             await mvcDemoDbContext.Employees.AddAsync(employee);
