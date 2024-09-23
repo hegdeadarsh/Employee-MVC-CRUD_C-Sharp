@@ -28,22 +28,31 @@ namespace MVCCRUD.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<IActionResult> Add(AddEmployeeViewModel addEmployeeRequest)
         {
-            var employee = new Employee()
+            try
             {
-                Id = Guid.NewGuid(),
-                Name = addEmployeeRequest.Name,
-                Email = addEmployeeRequest.Email,
-                Salary = addEmployeeRequest.Salary,
-                Department = addEmployeeRequest.Department,
-                DateOfBirth = addEmployeeRequest.DateOfBirth,
-                CreatedOn = DateTime.Now
-            };
+                var employee = new Employee()
+                {
+                    Id = Guid.NewGuid(),
+                    Name = addEmployeeRequest.Name,
+                    Email = addEmployeeRequest.Email,
+                    Salary = addEmployeeRequest.Salary,
+                    Department = addEmployeeRequest.Department,
+                    DateOfBirth = addEmployeeRequest.DateOfBirth,
+                    CreatedOn = DateTime.Now
+                };
 
-            await mvcDemoDbContext.Employees.AddAsync(employee);
-            await mvcDemoDbContext.SaveChangesAsync();
+                await mvcDemoDbContext.Employees.AddAsync(employee);
+                await mvcDemoDbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
 
             return RedirectToAction("Index");
         }
@@ -68,7 +77,6 @@ namespace MVCCRUD.Controllers
                 return await Task.Run(() => View("View", viewModel));
             }
 
-
             return RedirectToAction("Index");
         }
 
@@ -89,9 +97,7 @@ namespace MVCCRUD.Controllers
 
                 return RedirectToAction("Index");
             }
-
             return RedirectToAction("Index");
-
         }
 
         [HttpPost]
